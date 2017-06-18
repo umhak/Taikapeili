@@ -1,0 +1,8 @@
+node_modules/
+dist/
+links.txt
+prod/
+config.js
+api/route/config.js
+api/calendar/config.js
+api/calendar/birthdays.js

@@ -1,0 +1,22 @@
+import { REQUEST_WEATHER, RECEIVE_WEATHER, } from '../actions/weather';
+
+export default function weather(state = {
+    isFetching: false,
+    values: {}
+}, action) {
+    switch (action.type) {
+        case REQUEST_WEATHER:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case RECEIVE_WEATHER:
+            return Object.assign({}, state, {
+                isFetching: false,
+                values: action.weather,
+                config: action.config,
+                lastUpdated: action.receicedAt
+            });
+        default:
+            return state;
+    }
+}
