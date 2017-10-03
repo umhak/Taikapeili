@@ -1,0 +1,41 @@
+.routesContainer {
+
+}
+
+.depTime {
+}
+
+.lineCode {
+    padding-right: 10px;
+}
+
+.eta {
+    width: 45px;
+}
+
+.header {
+    font-size: 22px;
+}
+
+.dep {
+    font-size: 20px;
+}
+
+.departures {
+    color: white;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.stop {
+    padding-bottom: 10px;
+}
+
+.line {
+    width: 60px;
+}
+
+.rowHeader {
+    color: lightgray;
+    font-family: sans-serif;
+}

@@ -10,7 +10,7 @@ const containers = {
         {
             name: 'clock',
             type: 2 // 1 = digital, 2 = analog
-        },
+        }
     ],
     left: [
         {

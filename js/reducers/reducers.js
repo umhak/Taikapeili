@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import weather from './weatherReducer';
-import routes from './routeReducer';
+import oldRoutes from './oldRouteReducer';
 import calendar from './calendarReducer';
+import routes from './routeReducer';
 
 const rootReducer = combineReducers({
     weather,
-    routes,
-    calendar
+    oldRoutes,
+    calendar,
+    routes
 });
 
 export default rootReducer;

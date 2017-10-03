@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { map, isEmpty, merge, filter, take } from 'lodash';
 import moment from 'moment';
 
-import { fetchRoute } from '../../actions/route';
-import styles from './styles/route.css';
+import { fetchRoute, fetchRouteNewApi } from '../../actions/route';
+import styles from './styles/oldRoute.css';
 
 class Route extends Component {
     constructor(props) {
@@ -21,6 +21,7 @@ class Route extends Component {
 
     componentDidMount() {
         this.props.fetchRoute();
+        this.props.fetchRouteNewApi();
     }
 
     getDepartures(departures) {
@@ -123,7 +124,7 @@ Route.propTypes = {
     fetchRoute: PropTypes.func
 };
 
-function mapStateToProps({ routes }) {
+function mapStateToProps({ oldRoutes: routes }) {
     const { stops, updatedAt, isFetching } = routes;
 
     return {
@@ -135,7 +136,8 @@ function mapStateToProps({ routes }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchRoute: () => dispatch(fetchRoute())
+        fetchRoute: () => dispatch(fetchRoute()),
+        fetchRouteNewApi: () => dispatch(fetchRouteNewApi())
     };
 }
 

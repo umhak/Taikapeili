@@ -5,8 +5,9 @@ import styles from './styles/widget.css';
 import Clock from './clock.jsx';
 import AnalogClock from './analogClock.jsx';
 import Weather from './weather.jsx';
-import Route from './route.jsx';
+import OldRoute from './oldRoute.jsx';
 import Calendar from './calendar';
+import Route from '../route.jsx';
 
 export default class Widget extends React.Component {
     getComponent() {
@@ -25,12 +26,14 @@ export default class Widget extends React.Component {
             }
             case 'weather':
                 return <Weather config={this.props.data} />;
-            case 'route':
-                return <Route config={this.props.data} />;
+            case 'oldRoute':
+                return <OldRoute config={this.props.data} />;
             case 'calendar':
                 return <Calendar config={this.props.data} />;
+            case 'route':
+                return <Route />;
             default:
-                return null;
+                return <div> invalid component: {name} </div>;
         }
     }
 
