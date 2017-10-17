@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { map, isEmpty, merge, filter, take } from 'lodash';
+import { map, isEmpty } from 'lodash';
 import moment from 'moment';
 
 import { fetchRouteNewApi } from '../actions/route';
@@ -26,24 +26,25 @@ class Route extends Component {
     getDeparture(stoptime, depIndex) {
         const { realtimeState, arrivalDelay } = stoptime;
         const cells = [];
-
+        let classes = styles.dep;
         cells.push(<td>{stoptime.shortName}</td>);
         cells.push(<td>{stoptime.timeToArrival}</td>);
 
         let timeCell = stoptime.scheduledTime;
 
-        if (arrivalDelay >= 60 || arrivalDelay <= -60) {
+        if ((realtimeState !== 'CANCELED') && (arrivalDelay >= 60 || arrivalDelay <= -60)) {
             timeCell += ` -> ${stoptime.realTime}`;
         }
 
         cells.push(<td>{timeCell}</td>);
 
         if (realtimeState === 'CANCELED') {
-            cells.push(<td>Peruttu</td>);
+            // cells.push(<td>Peruttu</td>);
+            classes += ` ${styles.canceled}`;
         }
 
         return (
-          <tr key={depIndex} className={styles.dep}>
+          <tr key={depIndex} className={classes}>
             {cells}
           </tr>
         );

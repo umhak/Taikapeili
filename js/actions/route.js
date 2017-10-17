@@ -66,12 +66,15 @@ function parseStoptimes(stoptimesForServiceDate, stop, config) {
 
     each(stoptimesForServiceDate, patternStoptimeData => {
         const patternStopTimes = map(patternStoptimeData.stoptimes, stoptime => merge(
+            {},
+            stoptime,
             {
                 shortName: patternStoptimeData.pattern.route.shortName,
                 scheduledTime: toHHMM(stoptime.scheduledArrival),
                 realTime: toHHMM(stoptime.realtimeArrival),
-                timeToArrival: Math.ceil((stoptime.realtimeArrival - seconds) / 60)
-            }, stoptime)
+                timeToArrival: stoptime.realtimeState === 'CANCELED' ? Math.ceil((stoptime.scheduledArrival - seconds) / 60) : Math.ceil((stoptime.realtimeArrival - seconds) / 60),
+                realtimeArrival: stoptime.realtimeState === 'CANCELED' ? stoptime.scheduledArrival : stoptime.realtimeArrival
+            })
         );
 
         stoptimes = concat(stoptimes, patternStopTimes);
@@ -87,7 +90,7 @@ function parseStoptimes(stoptimesForServiceDate, stop, config) {
 
     stoptimes = sortBy(stoptimes, ['realtimeArrival']);
 
-    return take(stoptimes, 3);
+    return take(stoptimes, 5);
 }
 
 function parseRoute(resp, config) {

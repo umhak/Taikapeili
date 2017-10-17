@@ -25,6 +25,7 @@
     color: white;
     padding-bottom: 8px;
     padding-top: 8px;
+    border-collapse: collapse;
 }
 
 .stop {
@@ -38,4 +39,22 @@
 .rowHeader {
     color: lightgray;
     font-family: sans-serif;
+}
+
+.canceled {
+    color: lightcoral;
+    position: relative;
+}
+
+.canceled td {
+    position: relative;
+}
+
+.canceled td::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 2px solid lightcoral;
+    width: 100%;
 }
