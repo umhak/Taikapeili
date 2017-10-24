@@ -97,7 +97,7 @@ function parseRoute(resp, config) {
     return map(resp.data.stops, (stop) => {
         return {
             name: stop.name,
-            stoptimes: parseStoptimes(stop.stoptimesForServiceDate, stop, config)
+            stoptimes: parseStoptimes(stop.stoptimesForPatterns, stop, config)
         };
     });
 }
@@ -118,7 +118,7 @@ export function fetchRouteNewApi() {
         };
 
         let data = `{stops(ids: [${config.stops}])`;
-        data +=	`{name, code, desc, gtfsId, vehicleType, stoptimesForServiceDate(date:"${moment().format('YYYYMMDD')}") {`;
+        data +=	`{name, code, desc, gtfsId, vehicleType, stoptimesForPatterns {`;
         data += 'pattern { name, route { shortName } }, ';
         data += 'stoptimes{ realtimeArrival, scheduledArrival, arrivalDelay, realtimeState }';
         data += '}}}';
