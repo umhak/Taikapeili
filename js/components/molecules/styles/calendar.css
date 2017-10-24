@@ -1,5 +1,5 @@
 .calendar {
-    width: 300px;
+    width: 450px;
     display: flex;
     flex-direction: column;
 }
@@ -80,25 +80,13 @@
 .flagDay {
     display: flex;
     position: relative;
+    align-items: center;
 }
 
-.flagDay::before {
-    content: "t";
-    font-family: Flags;
-    margin-right: 5px;
+.flag {
+    margin-right: 10px;
+    height: 20px;
+    width: 45px;
     background-color: white;
-    color: black;
-    align-self: center;
-    height: 17px;
-    width: 22px;
-}
-
-.blackbox {
-    position: absolute;
-    background: transparent;
-    width: 22px;
-    height: 18px;
-    top: 0;
-    border-top: 3px solid black;
-    border-left: 1px solid black;
+    background-image:linear-gradient(180deg, transparent, transparent 40%, #003580 40%, #003580 60%, transparent 60%, transparent 100%), linear-gradient(90deg, transparent, transparent 20%, #003580 20%, #003580 40%, transparent 40%)
 }

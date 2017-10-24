@@ -40,8 +40,3 @@
     font-family: Helvetica-Bold;
     src: url('../../../../fonts/Helvetica-Bold.otf') format('opentype');
 }
-
-@font-face {
-    font-family: Flags;
-    src: url('../../../../fonts/Flags.ttf') format('truetype');
-}

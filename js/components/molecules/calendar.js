@@ -73,7 +73,7 @@ class Calendar extends Component {
                     case 'flagDay': {
                         content = (
                             <div className={styles.flagDay}>
-                                <div className={styles.blackbox} />
+                                <div className={styles.flag} />
                                 <span>{note.name}</span>
                             </div>);
                         break;
