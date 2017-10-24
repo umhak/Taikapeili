@@ -12,11 +12,14 @@ export default function routes(state = {
             });
         case RECEIVE_ROUTE: {
             const { stops, updatedAt } = action;
-            return merge({}, state, {
+
+            const result = merge({}, state, {
                 isFetching: false,
-                stops,
                 updatedAt
             });
+
+            result.stops = stops;
+            return result;
         }
         default:
             return state;
