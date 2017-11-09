@@ -17,7 +17,7 @@ const containers = {
             name: 'weather',
             apikey: weatherApiKey,
             requestParameters: ['wawa', 't2m', 'ws_10min', 'n_man'],
-            place: 'Helsinki'
+            place: 'Malmi,Helsinki'
         },
         {
             name: 'calendar'

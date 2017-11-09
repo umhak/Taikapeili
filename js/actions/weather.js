@@ -1,6 +1,7 @@
 import { each, get, last, assign } from 'lodash';
 import fi from 'wfsrequestparser';
-import weatherDescriptions from './weatherDescriptions';
+import SunCalc from 'suncalc';
+import moment from 'moment';
 
 export const REQUEST_WEATHER = 'REQUEST_WEATHER';
 export const RECEIVE_WEATHER = 'RECEIVE_WEATHER';
@@ -13,11 +14,12 @@ function requestWeather(config) {
     };
 }
 
-function receiveWeather(config, resp) {
+function receiveWeather(resp, daytime, times) {
     return {
         type: RECEIVE_WEATHER,
         weather: resp,
-        config,
+        daytime,
+        times,
         receicedAt: Date.now()
     };
 }
@@ -32,7 +34,6 @@ export function fetchWeather(config) {
 
         const cb = (data, errors) => {
             const weather = {};
-
             if (errors.length) {
                 weather.error = errors;
             } else {
@@ -44,19 +45,18 @@ export function fetchWeather(config) {
                         const property = paramData.property;
                         const lastValue = last(get(paramData, '.timeValuePairs'));
 
-                        if (param === 'wawa') {
-                            lastValue.value = weatherDescriptions[lastValue.value];
-                        }
                         // Calculate "feels like" if both temperature and wind speed were found
                         // feels_like = 13.12 + 0.6215 * values['t2m'] - 13.956 * (values['ws_10min'] ** 0.16) + 0.4867 * values['t2m'] * (values['ws_10min'] ** 0.16)
-
 
                         weather[param] = assign({}, property, lastValue);
                     });
                 }
             }
 
-            dispatch(receiveWeather(config, weather));
+            const times = SunCalc.getTimes(new Date(), 60.2, 24.9);
+            const daytime = moment().isBetween(times.sunrise, times.sunset);
+
+            dispatch(receiveWeather(weather, daytime, times));
         };
 
         const requestParameter = config.requestParameters.join(',');

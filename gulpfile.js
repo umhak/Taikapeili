@@ -13,7 +13,8 @@ var paths = {
 var filesToMove = [
     './index.html',
     'images/**/*.*',
-    'lib/**/*.*'
+    'lib/**/*.*',
+    'css/**/*.*'
 ];
 
 gulp.task('default', ['dev']);

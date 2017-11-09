@@ -1,77 +1,50 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { each } from 'lodash';
 import { fetchWeather } from '../../actions/weather';
 import styles from './styles/weather.css';
-
-const propTypes = {
-    config: PropTypes.object,
-    dispatch: PropTypes.func,
-    values: PropTypes.object
-};
+require('../../../css/weather-icons.min.css');
+import weatherIconMappings from './weatherIconMappings';
+import moment from 'moment';
+import { get } from 'lodash';
 
 class Weather extends Component {
     componentDidMount() {
         const { dispatch, config } = this.props;
         dispatch(fetchWeather(config));
-    }
 
-    get weatherInfo() {
-        const weathers = [];
-
-
-        const temperature = this.props.values.t2m || {};
-
-        return <div>{temperature.value} C</div>;
-
-        // todo: display more weather data:
-        // each(this.props.values, (weather, key) => {
-        //     weathers.push(
-        //         <div key={key}>
-        //             <span>{weather.label}:</span>
-        //             <span> {weather.value}</span>
-        //             <span> {weather.unit}</span>
-        //         </div>
-        //     );
-        // });
-
-        // return weathers;
-    }
-
-    // function to generate a random number range.
-    randRange(minNum, maxNum) {
-        return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
-    }
-
-    get drops() {
-        const dropsCount = 150;
-        const drops = [];
-        for (let i = 0; i < dropsCount; i++) {
-            const style = {
-                top: this.randRange(-200, 300),
-                left: this.randRange(1, 300)
-            };
-
-            drops.push(<div className={styles.drop} style={style} key={i} />);
-        }
-
-        return drops;
-    }
-
-    get animation() {
-        return null;
-        return (
-            <div className={styles.rain}>
-                {this.drops}
-            </div>
-        );
+        setInterval(() => {
+            dispatch(fetchWeather(config));
+        }, 120000);
     }
 
     render() {
+        const temperature = this.props.values.t2m || {};
+        const wawa = this.props.values.wawa || {};
+        const clouds = get(this.props, 'values.n_man') || 0;
+        const daytime = this.props.daytime;
+        const times = this.props.times || {};
+        let wawaClass;
+
+        if (wawa.value !== 0) {
+            wawaClass = 'wi-' + (daytime ? 'day' : 'night') + '-' + weatherIconMappings[wawa.value];
+        } else {
+            wawaClass = (daytime ? 'wi-day-' : 'wi-night-');
+
+            if (clouds > 1) {
+                wawaClass += (daytime ? 'sunny' : 'clear');
+            } else {
+                wawaClass += 'cloudy';
+            }
+        }
+
         return (
-            <div>
-                {this.weatherInfo}
-                {this.animation}
+            <div className={styles.weather}>
+                <div className={styles.wawa}><i className={'wi ' + wawaClass} /></div>
+                <div className={styles.weatherInfo}>
+                    <div className={styles.degree}>{Math.round(temperature.value)}<i className="wi wi-degrees" /></div>
+                    <div><i className="wi wi-sunrise" />{moment(times.sunrise).format('HH:mm')}</div>
+                    <div><i className="wi wi-sunset" />{moment(times.sunset).format('HH:mm')}</div>
+                </div>
             </div>
         );
     }
@@ -79,14 +52,22 @@ class Weather extends Component {
 
 function mapStateToProps(state) {
     const { weather } = state;
-    const { isFetching, values } = weather;
+    const { isFetching, values, daytime, times } = weather;
 
     return {
         isFetching,
-        values
+        values,
+        daytime,
+        times
     };
 }
 
-Weather.propTypes = propTypes;
+Weather.propTypes = {
+    config: PropTypes.object,
+    dispatch: PropTypes.func,
+    values: PropTypes.object,
+    times: PropTypes.object,
+    daytime: PropTypes.bool
+};
 
 export default connect(mapStateToProps)(Weather);

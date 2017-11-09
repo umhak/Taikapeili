@@ -13,7 +13,8 @@ export default function weather(state = {
             return Object.assign({}, state, {
                 isFetching: false,
                 values: action.weather,
-                config: action.config,
+                daytime: action.daytime,
+                times: action.times,
                 lastUpdated: action.receicedAt
             });
         default:
