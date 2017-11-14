@@ -4,6 +4,7 @@ import { fetchWeather } from '../../actions/weather';
 import styles from './styles/weather.css';
 require('../../../css/weather-icons.min.css');
 import weatherIconMappings from './weatherIconMappings';
+import moonPhaseIconMapping from './moonPhaseIconMapping';
 import moment from 'moment';
 import { get } from 'lodash';
 
@@ -22,6 +23,7 @@ class Weather extends Component {
         const wawa = this.props.values.wawa || {};
         const clouds = get(this.props, 'values.n_man') || 0;
         const daytime = this.props.daytime;
+        const moonPhase = this.props.moonPhase;
         const times = this.props.times || {};
         let wawaClass;
 
@@ -44,6 +46,7 @@ class Weather extends Component {
                     <div className={styles.degree}>{Math.round(temperature.value)}<i className="wi wi-degrees" /></div>
                     <div><i className="wi wi-sunrise" />{moment(times.sunrise).format('HH:mm')}</div>
                     <div><i className="wi wi-sunset" />{moment(times.sunset).format('HH:mm')}</div>
+                    <div><i className={'wi ' + moonPhaseIconMapping[moonPhase]} /></div>
                 </div>
             </div>
         );
@@ -52,13 +55,14 @@ class Weather extends Component {
 
 function mapStateToProps(state) {
     const { weather } = state;
-    const { isFetching, values, daytime, times } = weather;
+    const { isFetching, values, daytime, times, moonPhase } = weather;
 
     return {
         isFetching,
         values,
         daytime,
-        times
+        times,
+        moonPhase
     };
 }
 
@@ -67,7 +71,8 @@ Weather.propTypes = {
     dispatch: PropTypes.func,
     values: PropTypes.object,
     times: PropTypes.object,
-    daytime: PropTypes.bool
+    daytime: PropTypes.bool,
+    moonPhase: PropTypes.number
 };
 
 export default connect(mapStateToProps)(Weather);

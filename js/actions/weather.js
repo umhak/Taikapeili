@@ -14,12 +14,13 @@ function requestWeather(config) {
     };
 }
 
-function receiveWeather(resp, daytime, times) {
+function receiveWeather(resp, daytime, times, moonPhase) {
     return {
         type: RECEIVE_WEATHER,
         weather: resp,
         daytime,
         times,
+        moonPhase,
         receicedAt: Date.now()
     };
 }
@@ -56,7 +57,10 @@ export function fetchWeather(config) {
             const times = SunCalc.getTimes(new Date(), 60.2, 24.9);
             const daytime = moment().isBetween(times.sunrise, times.sunset);
 
-            dispatch(receiveWeather(weather, daytime, times));
+            const moon = SunCalc.getMoonIllumination(new Date());
+            const moonPhase = Math.round(moon.phase * 29);
+
+            dispatch(receiveWeather(weather, daytime, times, moonPhase));
         };
 
         const requestParameter = config.requestParameters.join(',');

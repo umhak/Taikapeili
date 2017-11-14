@@ -15,6 +15,7 @@ export default function weather(state = {
                 values: action.weather,
                 daytime: action.daytime,
                 times: action.times,
+                moonPhase: action.moonPhase,
                 lastUpdated: action.receicedAt
             });
         default:
