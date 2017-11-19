@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Layout from './components/templates/layout.jsx';
+import Layout from './components/layout.jsx';
 import { Provider } from 'react-redux';
 import createStore from './store';
 import { weatherApiKey } from '../config';

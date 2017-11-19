@@ -2,37 +2,6 @@ import moment from 'moment';
 import { ajax } from 'jquery';
 import { each, map, filter, merge, concat, take, sortBy, includes } from 'lodash';
 
-export const OLD_REQUEST_ROUTE = 'OLD_REQUEST_ROUTE';
-export const OLD_RECEIVE_ROUTE = 'OLD_RECEIVE_ROUTE';
-
-function oldRequestRoute() {
-    return {
-        type: OLD_REQUEST_ROUTE
-    };
-}
-
-function oldReceiveRoute(resp) {
-    return {
-        type: OLD_RECEIVE_ROUTE,
-        stops: resp,
-        updatedAt: moment()
-    };
-}
-
-// todo: use new api
-export function fetchRoute() {
-    return dispatch => {
-        dispatch(oldRequestRoute());
-
-        return ajax('http://localhost:3000/route')
-        .done((resp) => {
-            dispatch(oldReceiveRoute(resp));
-        }).error(() => {
-            console.log('error');
-        });
-    };
-}
-
 export const REQUEST_ROUTE = 'REQUEST_ROUTE';
 export const RECEIVE_ROUTE = 'RECEIVE_ROUTE';
 
@@ -102,7 +71,6 @@ function parseRoute(resp, config) {
     });
 }
 
-// wip:
 export function fetchRouteNewApi() {
     return dispatch => {
         dispatch(requestRoute());

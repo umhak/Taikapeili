@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { each } from 'lodash';
 import styles from './styles/layout.css';
-import Widget from '../molecules/widget.jsx';
+import Widget from './widget.jsx';
 
 class Layout extends Component {
     render() {

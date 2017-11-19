@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { each, join } from 'lodash';
 import moment from 'moment';
 
-import { fetchCalendar } from '../../actions/calendar';
+import { fetchCalendar } from '../actions/calendar';
 import styles from './styles/calendar.css';
 
 const propTypes = {

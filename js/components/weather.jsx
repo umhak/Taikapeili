@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchWeather } from '../../actions/weather';
+import { fetchWeather } from '../actions/weather';
 import styles from './styles/weather.css';
-require('../../../css/weather-icons.min.css');
+require('../../css/weather-icons.min.css');
 import weatherIconMappings from './weatherIconMappings';
 import moonPhaseIconMapping from './moonPhaseIconMapping';
 import moment from 'moment';
