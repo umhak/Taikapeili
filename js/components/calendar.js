@@ -1,16 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { each, join } from 'lodash';
 import moment from 'moment';
-
 import { fetchCalendar } from '../actions/calendar';
 import styles from './styles/calendar.css';
-
-const propTypes = {
-    fetchCalendar: PropTypes.func,
-    calendar: PropTypes.object,
-    isFetching: PropTypes.bool
-};
 
 class Calendar extends Component {
     componentDidMount() {
@@ -138,6 +132,10 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-Calendar.propTypes = propTypes;
+Calendar.propTypes = {
+    fetchCalendar: PropTypes.func,
+    calendar: PropTypes.object,
+    isFetching: PropTypes.bool
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

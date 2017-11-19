@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles/widget.css';
 
 // components
@@ -8,7 +9,7 @@ import Weather from './weather.jsx';
 import Calendar from './calendar';
 import Route from './route.jsx';
 
-export default class Widget extends React.Component {
+export default class Widget extends Component {
     getComponent() {
         const name = this.props.data.name;
 
@@ -42,5 +43,5 @@ export default class Widget extends React.Component {
 }
 
 Widget.propTypes = {
-    data: React.PropTypes.object.isRequired
+    data: PropTypes.object.isRequired
 };

@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './styles/analogClock.css';
 
-export default class Clock extends React.Component {
-
+export default class Clock extends Component {
     componentDidMount() {
         const canvas = this.refs.canvas;
         const ctx = canvas.getContext('2d');
