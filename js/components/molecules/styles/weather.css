@@ -4,10 +4,15 @@
 
 .degree {
     font-size: 38px;
+    line-height: 1px;
 }
 
 .wawa {
     font-size: 180px;
+}
+
+.wawa i {
+  line-height: normal;
 }
 
 .weatherInfo {
