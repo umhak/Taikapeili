@@ -7,7 +7,7 @@ import moment from 'moment';
 import { fetchRouteNewApi } from '../actions/route';
 import styles from './styles/route.css';
 
-class Route extends Component {
+export class Route extends Component {
     constructor(props) {
         super();
 
@@ -28,8 +28,8 @@ class Route extends Component {
         const { realtimeState, arrivalDelay } = stoptime;
         const cells = [];
         let classes = styles.dep;
-        cells.push(<td>{stoptime.shortName}</td>);
-        cells.push(<td>{stoptime.timeToArrival}</td>);
+        cells.push(<td key="shortname">{stoptime.shortName}</td>);
+        cells.push(<td key="timeToArrival">{stoptime.timeToArrival}</td>);
 
         let timeCell = stoptime.scheduledTime;
 
@@ -37,7 +37,7 @@ class Route extends Component {
             timeCell += ` -> ${stoptime.realTime}`;
         }
 
-        cells.push(<td>{timeCell}</td>);
+        cells.push(<td key="timeCell">{timeCell}</td>);
 
         if (realtimeState === 'CANCELED') {
             // cells.push(<td>Peruttu</td>);
@@ -115,7 +115,6 @@ class Route extends Component {
 }
 
 Route.propTypes = {
-    dispatch: PropTypes.func,
     stops: PropTypes.array,
     updatedAt: PropTypes.object,
     isFetching: PropTypes.bool,

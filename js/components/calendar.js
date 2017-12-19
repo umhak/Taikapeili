@@ -6,7 +6,7 @@ import moment from 'moment';
 import { fetchCalendar } from '../actions/calendar';
 import styles from './styles/calendar.css';
 
-class Calendar extends Component {
+export class Calendar extends Component {
     componentDidMount() {
         this.props.fetchCalendar();
         setInterval(() => {
@@ -57,7 +57,7 @@ class Calendar extends Component {
                         break;
                     }
                     case 'event': {
-                        const location = note.location ? ' / ' + note.location : undefined;
+                        const location = note.location ? ' @ ' + note.location : undefined;
                         const startTime = note.startTime ? note.startTime : undefined;
                         content = [];
                         content.push(<div className={styles.time} key={'startTime'}>{startTime}</div>);
