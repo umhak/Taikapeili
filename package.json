@@ -37,5 +37,12 @@
     "suncalc": "1.8.0",
     "url-loader": "0.5.7",
     "webpack": "1.12.6"
+  },
+  "devDependencies": {
+    "@storybook/react": "3.2.16"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   }
 }

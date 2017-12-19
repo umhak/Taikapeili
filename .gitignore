@@ -6,3 +6,5 @@ config.js
 api/route/config.js
 api/calendar/config.js
 api/calendar/birthdays.js
+
+!.storybook/config.js
